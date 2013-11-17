@@ -1,3 +1,4 @@
 C:\Users\Admin\Desktop\MEGADEATHULTIMATERAGEBATTLEOFTHESUPERHEROESDELUXE\Server\Server\bin\Debug\Server.exe.config
 C:\Users\Home\Desktop\MEGADEATHULTIMATERAGEBATTLEOFTHESUPERHEROESDELUXE\MEGADEATHULTIMATERAGEBATTLEOFTHESUPERHEROESDELUXE\Server\Server\bin\Debug\Server.exe.config
 C:\Users\Admin\Desktop\Server\Server\bin\Debug\Server.exe.config
+C:\Users\Home\Desktop\MEGADEATHULTIMATERAGEBATTLEOFTHESUPERHEROESDELUXE\GIT\Server\bin\Debug\Server.exe.config

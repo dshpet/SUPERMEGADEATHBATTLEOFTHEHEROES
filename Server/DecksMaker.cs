@@ -16,7 +16,7 @@ namespace Server
         private const string _filePathMarvel = "\\Resources\\Cards\\cardsMarvel.xml";
         private const string _filePathWarcraft = "\\Resources\\Cards\\cardsWarcraft.xml";
 
-        static IEnumerable<Card> MakeDeck(DeckType type)
+        public static IEnumerable<Card> MakeDeck(DeckType type)
         {
             switch (type)
             {
@@ -40,7 +40,7 @@ namespace Server
             }
         }
 
-        static IEnumerable<Card> MakeRandomDeck()
+       public static IEnumerable<Card> MakeRandomDeck()
         {
             var randomizer = new Random();
             double n = randomizer.NextDouble();
@@ -82,7 +82,7 @@ namespace Server
                 default: return null;
             }
         }
-
+        
         static IEnumerable<Card> MakeLOTRDeck()
         {
             var cards = new List<Card>();
