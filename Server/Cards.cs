@@ -13,37 +13,32 @@ namespace Server
         public string Name
         {
             get { return _name; }
-            set { _name = value; }
+            //set { _name = value; }
         }
 
         private string _image; //image on top of the card
         public string Image
         {
             get { return _image; }
-            set { _image = value; }
+            //set { _image = value; }
         }
 
         private int _resourceCost; //resource needed fro this card to be activated
         public int ResourceCost
         {
             get { return _resourceCost; }
-            set { _resourceCost = value; }
+            //set { _resourceCost = value; }
         }
 
-        private string _id;             //we can avoid using ID's
-        public string Id
-        {
-            get { return _id; }
-            set { _id = value; }
-        }
+        public string Description;
 
         //constructors are below
-        protected Card(string name, string image, int resourceCost, string id)
+        protected Card(string name, string image, int resourceCost, string description)
         {
             _name = name;
             _image = image;
             _resourceCost = resourceCost;
-            _id = id;
+            Description = description;
         }
 
         protected Card()
@@ -78,8 +73,8 @@ namespace Server
         }
 
         //constructors are below
-        public UnitCard(string name, string image, int resourceCost, string id, int HP, int damage)
-            : base(name, image, resourceCost, id)
+        public UnitCard(string name, string image, int resourceCost, string description, int HP, int damage)
+            : base(name, image, resourceCost, description)
         {
             _HP = HP;
             _damage = damage;
@@ -140,8 +135,8 @@ namespace Server
 
         //constructors are below
         public SpellCard(string name, string image, int resourceCost,
-                         string id, SpellType type, int power)
-            : base(name, image, resourceCost, id)
+                         string description, SpellType type, int power)
+            : base(name, image, resourceCost, description)
         {
             _type = type;
             _power = power;

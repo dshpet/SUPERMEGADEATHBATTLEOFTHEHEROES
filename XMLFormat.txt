@@ -1,0 +1,39 @@
+<Root>
+
+	<Card>
+		<Type>Unit</Type>
+		<Name>...</Name>
+		<Image>Resources/Images/Image.png</Image>
+		<ResourceCost>5</ResourceCost>
+		<HP>5</HP>
+		<Damage>5</Damage>
+		<Description>text</Description> //only short description.
+	</Card>
+
+	<Card>
+		<Type>Spell</Type>
+		<SpellType>DirectDamage</SpellType>
+		<Name>...</Name>
+		<Image></Image>
+		<ResourceCost></ResourceCost>
+		<Power>5</Power>
+		<Description></Description>
+	</Card>
+</Root>
+
+
+
+enum SpellType //special enum for spelltypes
+    {
+        DirectDamage,
+        AllAoeDamage,
+        NearTargetDamage,
+        RandomTargetsDamage,
+        AoeHeal,
+        DirectHeal,
+        DirectAttackBuff,
+        DirectAttackDebuff,
+        AoeAttackBuff,
+        AoeAttackDebuff,
+        DirectDisable
+    }
