@@ -16,14 +16,12 @@ namespace Server
         public IPAddress IP
         {
             get { return _ip; }
-            //set { _ip = value; }
         }
 
         private DeckType _deck;
         public DeckType Deck
         {
             get { return _deck; }
-            //set { _deck = value; }
         }
 
         private IEnumerable<Card> _hand;
@@ -38,19 +36,45 @@ namespace Server
         public int HP
         {
             get { return _hp; }
-            //set { _hp = value; } // ne nado nam set zdes'. budet metod
         }
 
         private int _resource;
         public int Resource
         {
             get { return _resource; }
-            //set { _resource = value; } //i zdes toje
+        }
+
+        private int _maxResource;
+        public int MaxResource
+        {
+            get { return _maxResource; }
+        }
+
+        public Player(DeckType deck, IPAddress ip)
+        {
+            _deck = deck;
+            _ip = ip;
+            _hand = new List<Card>();
+            _activeCards = new List<Card>();
+            _defence = new List<Card>();
+            if (deck != null)
+                _currentDeck = DecksMaker.MakeDeck(deck);
+            else
+                _currentDeck = DecksMaker.MakeRandomDeck();
+            _hp = 25;
+            _maxResource = 1;
+            _resource = 1;
         }
 
         #region METHODS
         // COMMENT IF YOU DO ANY SHIT
         //methods part
+        public void SetUpNewTurn()
+        {
+            DefenseBackToActive();
+            if (_maxResource < 10) _maxResource++;
+            _resource = _maxResource;
+        }
 
         private void MoveCard(ref IEnumerable<Card> from, int index, ref IEnumerable<Card> where)
         {
@@ -63,10 +87,32 @@ namespace Server
             from = a;
         }
 
+        public bool IsAlive()
+        {
+            return _hp > 0;
+        }
+
         public void TakeDamage(int amount)
         {
-            if (amount >= 0)
-                _hp += amount;
+            if (amount > 0)
+                _hp -= amount;
+        }
+
+        public void Heal(int amount)
+        {
+            _hp += amount;
+            if (_hp > 50) _hp = 50;
+        }
+
+        public void UseResource(int amount)
+        {
+            if (amount <= _resource)
+                _resource -= amount;
+        }
+
+        public bool HasCardsInDefense()
+        {
+            return _defence.Count() > 0;
         }
 
         public void DrawCard()
@@ -81,6 +127,7 @@ namespace Server
         {
             MoveCard(ref _hand, index, ref _activeCards);
         }
+
         public void DefendWithCard(int index)
         {
             MoveCard(ref _activeCards, index, ref _defence);
@@ -96,7 +143,7 @@ namespace Server
             _defence = a;
         }
 
-        public bool CardTakeDamage(ref IEnumerable<Card> where, int amount, int index)
+        private bool ChangeUnitHP(ref IEnumerable<Card> where, int amount, int index)
         {
             var a = where.ToList<Card>();
             var unit = (a[index] as UnitCard);
@@ -110,6 +157,37 @@ namespace Server
 
             where = a;
             return false;
+        }
+        
+        public bool ChangeDefensiveUnitHP(int amount, int index)
+        {
+            return ChangeUnitHP(ref _defence, amount, index);
+        }
+
+        public bool ChangeActiveUnitHP(int amount, int index)
+        {
+            return ChangeUnitHP(ref _activeCards, amount, index);
+        }
+
+        private void ChangeUnitAttack(ref IEnumerable<Card> where, int amount, int index)
+        {
+            var a = where.ToList<Card>();
+            var unit = (a[index] as UnitCard);
+            if (unit.Damage >= amount)
+                unit.ChangeDamage(amount);
+            else unit.ChangeDamage(unit.Damage * -1);
+
+            where = a;
+        }
+
+        public void ChangeDefensiveCardAttack(int amount, int index)
+        {
+            ChangeUnitAttack(ref _defence, amount, index);
+        }
+
+        public void ChangeActiveCardAttack(int amount, int index)
+        {
+            ChangeUnitAttack(ref _activeCards, amount, index);    
         }
 
         #endregion

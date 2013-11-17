@@ -13,21 +13,18 @@ namespace Server
         public string Name
         {
             get { return _name; }
-            //set { _name = value; }
         }
 
         private string _image; //image on top of the card
         public string Image
         {
             get { return _image; }
-            //set { _image = value; }
         }
 
         private int _resourceCost; //resource needed fro this card to be activated
         public int ResourceCost
         {
             get { return _resourceCost; }
-            //set { _resourceCost = value; }
         }
 
         public string Description;
@@ -55,14 +52,12 @@ namespace Server
         public int HP
         {
             get { return _HP; }
-            //set { _HP = value; } you dont set this
         }
 
         private int _damage; //Damage that can be dealt
         public int Damage
         {
             get { return _damage; }
-            //set { _damage = value; } and this
         }
 
         private bool _onCooldown = false;
@@ -82,26 +77,37 @@ namespace Server
         public UnitCard()
             : base()
         {
-            ; //just calling base exception //wtf? why u need this?
+            ; //just calling base exception 
         }
 
         //Methods part of this card below
+        /// <summary>
+        /// Adds the amount to property. Use negative value to decrease.
+        /// </summary>
+        /// <param name="amount"></param>
         public void ChangeDamage(int amount) //changing on amount
         {
             if (_damage != null)
                 _damage += amount;
         }
+
+        /// <summary>
+        /// Adds the amount to property. Use negative value to decrease.
+        /// </summary>
+        /// <param name="amount"></param>
         public void ChangeHP(int amount) //same
         {
             if (_HP != null)
                 _HP += amount;
         }
+
         public bool IsAlive() //checking if we can use this card
         {
             if (_HP != null)
                 return _HP > 0;
             return false;
         }
+
         public bool IsOnCooldown()
         {
             return _onCooldown;
@@ -123,14 +129,12 @@ namespace Server
         public SpellType Type
         {
             get { return _type; }
-            //set { _type = value; } you dont set these things
         }
 
         private int _power; //amount of smthing that shows influence rate
         public int Power
         {
             get { return _power; }
-            //set { _power = value; }
         }
 
         //constructors are below
@@ -147,7 +151,6 @@ namespace Server
             ;
         }
     }
-    
     
     
     enum SpellType //special enum for spelltypes
