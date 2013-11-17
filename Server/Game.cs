@@ -8,9 +8,6 @@ namespace Server
 {
     public class Game
     {
-        private Player _player1;
-        private Player _player2;
-
 
     }
 }
