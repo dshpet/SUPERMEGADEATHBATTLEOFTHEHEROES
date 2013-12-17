@@ -1,4 +1,0 @@
-SUPERMEGADEATHBATTLEOFTHEHEROES
-===============================
-
-gamzenio
